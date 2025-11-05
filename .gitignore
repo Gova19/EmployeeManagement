@@ -1,0 +1,113 @@
+﻿# ==========================================
+# .NET Core / ASP.NET Core API Git Ignore
+# ==========================================
+
+# --- Build outputs ---
+bin/
+obj/
+out/
+Debug/
+Release/
+publish/
+
+# --- User-specific files ---
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.rsuser
+*.vcxproj.user
+
+# --- IDE & Editor files ---
+.vscode/
+.idea/
+*.sln.iml
+
+# --- Logs & Temporary files ---
+*.log
+*.tlog
+*.vspscc
+*.cache
+*.tmp
+*.bak
+*.swp
+*.ncb
+*.dbmdl
+
+# --- Visual Studio ---
+.vs/
+*.dbmdl
+*.jfm
+
+# --- Resharper / Rider ---
+_ReSharper*/
+*.DotSettings.user
+*.DotSettings
+
+# --- NuGet packages ---
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# --- Secrets & Config ---
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+*.env
+.env.*
+
+# --- Certificates ---
+*.pfx
+*.p12
+*.cer
+*.key
+
+# --- Docker ---
+docker-compose.override.yml
+*.pid
+*.pid.lock
+
+# --- Publish / Deployment ---
+publish/
+dist/
+artifacts/
+wwwroot/dist/
+wwwroot/node_modules/
+
+# --- Node / Frontend (if using React/Angular) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage/
+.eslintcache
+
+# --- Test Results ---
+TestResult.xml
+TestResults/
+coverage.cobertura.xml
+*.trx
+
+# --- OS generated files ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- JetBrains Rider ---
+.idea/
+*.sln.iml
+
+# --- Backup files ---
+*.bak
+*.orig
+
+# --- Temporary publish profiles ---
+*.pubxml
+*.publishproj
+Properties/PublishProfiles/

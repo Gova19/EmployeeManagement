@@ -1,0 +1,59 @@
+﻿### 🔐 Login to get JWT token
+POST https://localhost:8080/api/Auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password"
+}
+###
+
+### 🌐 Base URL
+@baseUrl = http://localhost:8080/api/Employee
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBZG1pbiIsImp0aSI6IjgzNGIxMzY1LWU2ZmMtNGQyOC1iY2FjLTZmZDUxNGJiY2Q5NCIsImV4cCI6MTc2MjMzOTU1OCwiaXNzIjoiRU1TLkFwaSIsImF1ZCI6IkVNUy5DbGllbnQifQ.7OQcsLbyhHTfwCiyDtjHvxE4J4fW2i4oaouLIzfjGpc
+
+### 🧾 Get all employees
+GET {{baseUrl}}
+Authorization: Bearer {{authToken}}
+Accept: application/json
+
+
+### 🔍 Get employee by ID
+# Replace the Guid below with an existing one from GET response
+GET {{baseUrl}}/379b1fb5-e97d-4737-95d8-0cc13dfec956
+Authorization: Bearer {{@authToken}}
+Accept: application/json
+
+###
+
+### ➕ Create a new employee
+POST {{baseUrl}}
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice.johnson@ems.com",
+  "jobTitle": "Project Manager"
+}
+
+###
+
+### ✏️ Update an employee’s job title
+# Replace the ID with an existing employee Guid
+PUT {{baseUrl}}/3e450892-00ec-425b-9163-b60563a1bab9
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "jobTitle": "Senior Project Manager"
+}
+
+###
+
+### ❌ Delete an employee
+# Replace the Guid below with a valid employee ID
+DELETE {{baseUrl}}/3e450892-00ec-425b-9163-b60563a1bab9
+Authorization: Bearer {{authToken}}
+Accept: application/json
