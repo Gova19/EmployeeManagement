@@ -15,20 +15,38 @@ jobs:
       id-token: write
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup .NET
+      # 2️ Setup .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
-      # 3️⃣ Restore and build
+      # 3️ Restore and build
       - name: Build solution
         run: dotnet build EmployeeManagement.sln --configuration Release
 
-      # 4️⃣ Log in to GitHub Container Registry
+      # 4️ Log in to GitHub Container Registry
       - name: Login to GHCR
         uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 5️ Build Docker image from Api project folder
+      - name: Build Docker image
+        run: |
+          IMAGE_NAME=ghcr.io/gova19/employeemanagement-api
+          docker build -t $IMAGE_NAME:latest -f EmployeeManagement.Api/Dockerfile EmployeeManagement.Api
+          docker tag $IMAGE_NAME:latest $IMAGE_NAME:v1
+
+      # 6️ Push image to GHCR
+      - name: Push Docker image
+        run: |
+          IMAGE_NAME=ghcr.io/gova19/employeemanagement-api
+          docker push $IMAGE_NAME:latest
+          docker push $IMAGE_NAME:v1
