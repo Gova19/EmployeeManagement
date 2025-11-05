@@ -1,18 +1,34 @@
-name: Docker Image CI
+name: Build and Push Docker Image to GHCR
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-
-  build:
-
+  build-and-push:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # 3️⃣ Restore and build
+      - name: Build solution
+        run: dotnet build EmployeeManagement.sln --configuration Release
+
+      # 4️⃣ Log in to GitHub Container Registry
+      - name: Login to GHCR
+        uses: docker/login-action@v3
