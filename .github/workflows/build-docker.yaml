@@ -1,0 +1,21 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main  # or master
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build ./api/ -t your-docker-username/employeemanagement-api:latest
+
+      - name: Push image to Docker Hub
+        run: |
+          docker login -u gova19docker -p ${{secrets.DOCKER_PAT_TOKEN}}
+          docker push gova19docker/employeemanagement-api:latest
