@@ -12,8 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build image
-        run: docker build ./api/ -t your-docker-username/employeemanagement-api:latest
+      - name: Build Docker image
+        run: docker build -f ./EmployeeManagement.Api/Dockerfile -t ghcr.io/gova19/employeemanagement:latest ./EmployeeManagement.Api
+
 
       - name: Push image to Docker Hub
         run: |
